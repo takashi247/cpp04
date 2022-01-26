@@ -11,9 +11,9 @@ OBJSDIR		:= objs/
 SRCS		:= main.cpp \
 				Animal.cpp \
 				Dog.cpp \
-				Cat.cpp \
-				WrongAnimal.cpp \
-				WrongCat.cpp
+				Cat.cpp
+				# WrongAnimal.cpp \
+				# WrongCat.cpp
 
 OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.cpp=.o))
 
