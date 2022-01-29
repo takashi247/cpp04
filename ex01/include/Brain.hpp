@@ -8,13 +8,14 @@ class Brain
     public:
         Brain();
         virtual ~Brain();
-        Brain(const Brain &copy);
-        Brain &operator=(const Brain &copy);
-        const std::string[100]  &getIdeas() const;
-        void                    setIdeas(std::string new_ideas[100]);
+        Brain(const Brain &other);
+        Brain &operator=(const Brain &other);
+        const std::string   &getIdeas(const int index) const;
+        void                setIdeas(const int index, const std::string &new_idea);
     private:
-        std::string ideas[100];
-}
+        static const int            IDEA_SIZE = 100;
+        static const std::string    ERR_MSG_FOR_INDEX_OUT_OF_RANGE;
+        std::string                 ideas[IDEA_SIZE];
+};
 
 #endif
-
