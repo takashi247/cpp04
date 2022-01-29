@@ -6,17 +6,17 @@ const std::string	Brain::ERR_MSG_FOR_INDEX_OUT_OF_RANGE = \
 
 Brain::Brain()
 {
-	std::cout << "Brain default constructor called" << std::endl;
+	std::cout << "Brain's default constructor called" << std::endl;
 }
 
 Brain::~Brain()
 {
-	std::cout << "Brain destructor called" << std::endl;
+	std::cout << "Brain's destructor called" << std::endl;
 }
 
 Brain::Brain(const Brain &other)
 {
-	std::cout << "Brain copy constructor called" << std::endl;
+	std::cout << "Brain's copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -25,14 +25,14 @@ Brain
 {
 	if (this != &other)
 	{
-		for (int i = 0; i++; i < this->IDEA_SIZE)
+		for (int i = 0; i < this->IDEA_SIZE; ++i)
 			this->setIdeas(i, other.getIdeas(i));
 	}
 	return (*this);
 }
 
 const std::string
-	&Brain::getIdeas(const int index) const
+	Brain::getIdeas(const int index) const
 {
 	if (0 <= index && index < this->IDEA_SIZE)
 		return (this->ideas[index]);

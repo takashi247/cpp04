@@ -10,7 +10,7 @@ class Brain
         virtual ~Brain();
         Brain(const Brain &other);
         Brain &operator=(const Brain &other);
-        const std::string   &getIdeas(const int index) const;
+        const std::string   getIdeas(const int index) const;
         void                setIdeas(const int index, const std::string &new_idea);
     private:
         static const int            IDEA_SIZE = 100;

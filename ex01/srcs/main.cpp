@@ -1,6 +1,5 @@
-#include "Dog.hpp"
-#include "Cat.hpp"
-#include "WrongCat.hpp"
+#include "../include/Dog.hpp"
+#include "../include/Cat.hpp"
 #include <iostream>
 
 /*
@@ -13,45 +12,28 @@ static void destructor() {
 int
 	main()
 {
-	const Animal*	animal = new Animal();
-	const Animal*	animal_dog = new Dog();
-	const Animal*	animal_cat = new Cat();
-    const Cat*      cat_cat = new Cat();
+    const int   num_of_animal = 4;
+    Animal      *animals[num_of_animal];
 
-	std::cout << "type of animal: " << animal->getType() << std::endl;
-	std::cout << "type of animal_dog: " << animal_dog->getType() << std::endl;
-	std::cout << "type of animal_cat: " <<  animal_cat->getType() << std::endl;
-	std::cout << "type of cat_cat: " <<  cat_cat->getType() << std::endl;
-    std::cout << "animal's makeSound: ";
-    animal->makeSound();
-    std::cout << std::endl;
-    std::cout << "animal_dog's makeSound: ";
-	animal_dog->makeSound();
-    std::cout << "animal_cat's makeSound: ";
-	animal_cat->makeSound();
-    std::cout << "cat_cat's makeSound: ";
-	cat_cat->makeSound();
-    delete animal;
-    delete animal_dog;
-    delete animal_cat;
-    delete cat_cat;
+    std::cout << "----Constructor starts----" << std::endl;
+    for (int i = 0; i < (num_of_animal / 2); ++i)
+        animals[i] = new Dog();
+    for (int i = num_of_animal / 2; i < num_of_animal; ++i)
+        animals[i] = new Cat();
+    std::cout << "----Constructor ends----\n" << std::endl;
+    for (int i = 0; i < num_of_animal; ++i)
+        std::cout << "type of animal " << i << " is " << animals[i]->getType() << std::endl;
+    for (int i = 0; i < num_of_animal; ++i)
+        animals[i]->makeSound();
 
-    std::cout << "\nTest for WrongAnimals" << std::endl;
-
-    const WrongAnimal*  wanimal= new WrongAnimal();
-    const WrongAnimal*  wanimal_wcat = new WrongCat();
-    const WrongCat*     wcat_wcat = new WrongCat();
-
-	std::cout << "type of wanimal: " << wanimal->getType() << std::endl;
-	std::cout << "type of wanimal_wcat: " << wanimal_wcat->getType() << std::endl;
-	std::cout << "type of wcat_wcat: " << wcat_wcat->getType() << std::endl;
-    std::cout << "wanimal's makeSound: ";
-    wanimal->makeSound();
-    std::cout << "wanimal_wcat's makeSound: ";
-    wanimal_wcat->makeSound();
-    std::cout << "wcat_wcat's makeSound: ";
-    wcat_wcat->makeSound();
-    delete wanimal;
-    delete wanimal_wcat;
-    delete wcat_wcat;
+    std::cout << "\n----Deep copy test starts----" << std::endl;
+    Dog basic;
+    {
+        Dog tmp1 = basic;
+        Dog tmp2(basic);
+    }
+    std::cout << "----Deep copy test ends----\n" << std::endl;
+    std::cout << "----Destructor starts----" << std::endl;
+    for (int i = 0; i < num_of_animal; ++i)
+        delete animals[i];
 }

@@ -3,12 +3,12 @@
 
 Animal::Animal()
 {
-    std::cout << "The constructor of Animal class was called" << std::endl;
+    std::cout << "Animal's default constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal &other)
 {
-    std::cout << "The copy constructor of Animal class was called" << std::endl;
+    std::cout << "Animal's copy constructor called" << std::endl;
 	*this = other;
 }
 
@@ -22,7 +22,7 @@ Animal
 
 Animal::~Animal()
 {
-    std::cout << "The destructor of Animal class was called" << std::endl;
+    std::cout << "Animal's destructor called" << std::endl;
 }
 
 const std::string
