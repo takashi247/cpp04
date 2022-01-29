@@ -1,10 +1,14 @@
 #include "Animal.hpp"
+#include <iostream>
 
 Animal::Animal()
-{}
+{
+    std::cout << "The constructor of Animal class was called" << std::endl;
+}
 
 Animal::Animal(const Animal &other)
 {
+    std::cout << "The copy constructor of Animal class was called" << std::endl;
 	*this = other;
 }
 
@@ -17,7 +21,9 @@ Animal
 }
 
 Animal::~Animal()
-{}
+{
+    std::cout << "The destructor of Animal class was called" << std::endl;
+}
 
 const std::string
 	&Animal::getType() const

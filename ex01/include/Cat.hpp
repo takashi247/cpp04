@@ -9,8 +9,8 @@ class Cat : public Animal
 		Cat();
 		Cat(const Cat &other);
 		~Cat();
-		Cat			&operator=(const Cat &other);
-		void		makeSound() const;
+		Cat							&operator=(const Cat &other);
+		void						makeSound() const;
 		static const std::string	TYPE_NAME;
 };
 

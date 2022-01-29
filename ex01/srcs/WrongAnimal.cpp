@@ -2,10 +2,13 @@
 #include <iostream>
 
 WrongAnimal::WrongAnimal()
-{}
+{
+    std::cout << "The constructor of WrongAnimal class was called" << std::endl;
+}
 
 WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
+    std::cout << "The copy constructor of WrongAnimal class was called" << std::endl;
 	*this = other;
 }
 
@@ -18,7 +21,9 @@ WrongAnimal
 }
 
 WrongAnimal::~WrongAnimal()
-{}
+{
+    std::cout << "The destructor of WrongAnimal class was called" << std::endl;
+}
 
 const std::string
 	&WrongAnimal::getType() const
