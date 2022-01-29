@@ -14,6 +14,7 @@ int
 {
     const int   num_of_animal = 4;
     Animal      *animals[num_of_animal];
+    // Animal      test; // Animal class can't be instantiated as it is now an abstract class
 
     std::cout << "----Constructor starts----" << std::endl;
     for (int i = 0; i < (num_of_animal / 2); ++i)

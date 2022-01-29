@@ -36,7 +36,3 @@ void
 {
 	this->type = new_type;
 }
-
-void
-    Animal::makeSound() const
-{}
