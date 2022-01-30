@@ -5,8 +5,7 @@
 
 #include "ICharacter.hpp"
 
-class AMateria
-{
+class AMateria {
  public:
   AMateria();
   explicit AMateria(const std::string &type);
