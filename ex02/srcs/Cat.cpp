@@ -21,6 +21,7 @@ Cat::Cat(const Cat &other)
 Cat
 	&Cat::operator=(const Cat &other)
 {
+	std::cout << "Cat's assignation operator called" << std::endl;
 	if (this != &other)
 	{
 		this->setType(other.getType());

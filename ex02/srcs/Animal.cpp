@@ -1,28 +1,29 @@
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal()
+Animal::Animal() : type("")
 {
-    std::cout << "Animal's default constructor called" << std::endl;
+  std::cout << "Animal's default constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal &other)
 {
-    std::cout << "Animal's copy constructor called" << std::endl;
+  std::cout << "Animal's copy constructor called" << std::endl;
 	*this = other;
 }
 
 Animal
 	&Animal::operator=(const Animal &other)
 {
+  std::cout << "Animal's assignation operator called" << std::endl;
 	if (this != &other)
-		this->setType(other.getType());
+    type = other.getType();
 	return (*this);
 }
 
 Animal::~Animal()
 {
-    std::cout << "Animal's destructor called" << std::endl;
+  std::cout << "Animal's destructor called" << std::endl;
 }
 
 const std::string
