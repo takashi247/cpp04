@@ -2,11 +2,13 @@
 
 #include <iostream>
 
-MateriaSource::MateriaSource() {
+const std::string MateriaSource::kErrMsgFullyLearned = "ERROR: The materia source is fully used";
+
+MateriaSource::MateriaSource() : num_of_learned_materias_(0) {
   std::cout << "MateriaSource's default constructor called" << std::endl;
 }
 
-MateriaSource::MateriaSource(MateriaSource const &other) {
+MateriaSource::MateriaSource(MateriaSource const &other) : num_of_learned_materias_(0) {
   std::cout << "MateriaSource's copy constructor called" << std::endl;
   *this = other;
 }
@@ -39,16 +41,23 @@ MateriaSource::~MateriaSource() {
 }
 
 void MateriaSource::learnMateria(AMateria *m) {
+  if (!m->getAvailability()) {
+    AMateria::print_availability_error();
+    return ;
+  }
   if (num_of_learned_materias_ < kMaxNumOfLearnedMaterias) {
-    learned_materias_[num_of_learned_materias_] = m->clone();
+    learned_materias_[num_of_learned_materias_] = m;
+    m->setAvailability(false);
     ++num_of_learned_materias_;
+  }
+  else {
+    printMateriaSourceError();
+    return ;
   }
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type) {
-  if (type == "") {
-    return 0;
-  } else {
+  if (type != "") {
     int idx = 0;
     while (idx < kMaxNumOfLearnedMaterias && learned_materias_[idx]->getType() != type) {
       ++idx;
@@ -57,4 +66,9 @@ AMateria *MateriaSource::createMateria(std::string const &type) {
       return learned_materias_[idx]->clone();
     }
   }
+  return 0;
+}
+
+void MateriaSource::printMateriaSourceError() {
+  std::cout << MateriaSource::kErrMsgFullyLearned << std::endl;
 }
