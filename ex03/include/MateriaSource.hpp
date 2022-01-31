@@ -11,8 +11,10 @@ class MateriaSource : public IMateriaSource {
   ~MateriaSource();
   void learnMateria(AMateria *m);
   AMateria *createMateria(std::string const &type);
+  void printMateriaSourceError();
 
  private:
+  static const std::string kErrMsgFullyLearned;
   static const int kMaxNumOfLearnedMaterias = 4;
   AMateria* learned_materias_[kMaxNumOfLearnedMaterias];
   int num_of_learned_materias_;
