@@ -5,16 +5,13 @@
 const std::string MateriaSource::kErrMsgFullyLearned = "ERROR: The materia source is fully used";
 
 MateriaSource::MateriaSource() : num_of_learned_materias_(0) {
-  std::cout << "MateriaSource's default constructor called" << std::endl;
 }
 
 MateriaSource::MateriaSource(MateriaSource const &other) : num_of_learned_materias_(0) {
-  std::cout << "MateriaSource's copy constructor called" << std::endl;
   *this = other;
 }
 
 MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
-  std::cout << "MateriaSource's assignation operator called" << std::endl;
   if (this != &other) {
     for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
       AMateria* tmp;
@@ -34,7 +31,6 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
 }
 
 MateriaSource::~MateriaSource() {
-  std::cout << "MateriaSource's destructor called" << std::endl;
   for (int i = 0; i < num_of_learned_materias_; ++i) {
     delete learned_materias_[i];
   }
