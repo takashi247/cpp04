@@ -3,21 +3,21 @@
 
 #include <string>
 
-#include "ICharacter.hpp"
+class ICharacter;
 
 class AMateria {
  public:
-  AMateria();
-  explicit AMateria(const std::string &type);
-  AMateria(const AMateria &other);
   AMateria &operator=(const AMateria &other);
-  ~AMateria();
+  virtual ~AMateria();
   const std::string &getType() const;
   void setType(const std::string type);
   virtual AMateria *clone() const = 0;
   virtual void use(ICharacter &target);
 
  protected:
+  AMateria();
+  explicit AMateria(const std::string &type);
+  AMateria(const AMateria &other);
   std::string type_;
 };
 
