@@ -43,7 +43,7 @@ int
     }
     std::cout << "----Deep copy test ends----\n" << std::endl;
 
-    std::cout << "\n----Assignation test starts----" << std::endl;
+    std::cout << "----Assignation test starts----" << std::endl;
     *animals[2] = *animals[3];
     for (int i = 0; i < num_of_animal; ++i)
         std::cout << "type of animal " << i << " is " << animals[i]->getType() << std::endl;
