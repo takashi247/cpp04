@@ -6,14 +6,23 @@
 
 Character::Character() {
   std::cout << "Character's default constructor called" << std::endl;
+  for (int i = 0; i < kMaxNumOfMaterias; ++i) {
+    materias_[i] = NULL;
+  }
 }
 
 Character::Character(const std::string &name) : name_(name) {
   std::cout << "Character " << name_ << " constructed" << std::endl;
+  for (int i = 0; i < kMaxNumOfMaterias; ++i) {
+    materias_[i] = NULL;
+  }
 }
 
 Character::Character(Character const &other) {
   std::cout << "Character's copy constructor called" << std::endl;
+  for (int i = 0; i < kMaxNumOfMaterias; ++i) {
+    materias_[i] = NULL;
+  }
   *this = other;
 }
 
@@ -22,16 +31,11 @@ Character &Character::operator=(Character const &other) {
   if (this != &other) {
     name_ = other.getName();
     for (int i = 0; i < kMaxNumOfMaterias; ++i) {
-      bool is_equiped = is_equiped_[i];
-      AMateria* tmp;
-      if (is_equiped) {
-        tmp = materias_[i];
-      }
-      if (other.is_equiped_[i]) {
+      AMateria* tmp = materias_[i];
+      if (other.materias_[i]) {
         materias_[i] = (other.materias_[i])->clone();
-        is_equiped_[i] = true;
       }
-      if (is_equiped) {
+      if (tmp) {
         delete tmp;
       }
     }
@@ -42,12 +46,9 @@ Character &Character::operator=(Character const &other) {
 Character::~Character() {
   std::cout << "Character's destructor called" << std::endl;
   for (int i = 0; i < kMaxNumOfMaterias; ++i) {
-    if (is_equiped_[i]) {
+    if (materias_[i]) {
       delete materias_[i];
     }
-  }
-  for (int i = 0; i < next_unequiped_pos_; ++i) {
-    delete unequiped_materias_[i];
   }
 }
 
@@ -57,25 +58,28 @@ const std::string &Character::getName() const {
 
 void Character::equip(AMateria *m) {
   int idx = 0;
-  while (idx < kMaxNumOfMaterias && is_equiped_[idx]) {
+  if (!m->getAvailability()) {
+    AMateria::print_availability_error();
+    return ;
+  }
+  while (idx < kMaxNumOfMaterias && materias_[idx]) {
     ++idx;
   }
   if (idx < kMaxNumOfMaterias) {
     materias_[idx] = m;
-    is_equiped_[idx] = true;
+    m->setAvailability(false);
   }
 }
 
 void Character::unequip(int idx) {
-  if (0 <= idx && idx < kMaxNumOfMaterias && is_equiped_[idx]) {
-    unequiped_materias_[next_unequiped_pos_] = materias_[idx];
-    ++next_unequiped_pos_;
-    is_equiped_[idx] = false;
+  if (0 <= idx && idx < kMaxNumOfMaterias && materias_[idx]) {
+    materias_[idx]->setAvailability(true);
+    materias_[idx] = NULL;
   }
 }
 
 void Character::use(int idx, ICharacter &target) {
-  if (0 <= idx && idx < kMaxNumOfMaterias && is_equiped_[idx]) {
+  if (0 <= idx && idx < kMaxNumOfMaterias && materias_[idx]) {
     materias_[idx]->use(target);
   }
 }
