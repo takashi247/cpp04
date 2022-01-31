@@ -21,12 +21,8 @@ class Character : public ICharacter {
 
  private:
   static const int kMaxNumOfMaterias = 4;
-  static const int kMaxNumOfUnequipedMaterias = 100;
   std::string name_;
   AMateria* materias_[kMaxNumOfMaterias];
-  bool is_equiped_[kMaxNumOfMaterias];
-  AMateria* unequiped_materias_[kMaxNumOfUnequipedMaterias];
-  int next_unequiped_pos_;
 };
 
 #endif // CHARACTER_HPP
