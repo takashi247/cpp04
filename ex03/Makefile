@@ -14,8 +14,7 @@ SRCS		:= main.cpp \
 				Cure.cpp \
 				Character.cpp \
 				MateriaSource.cpp \
-				ICharacter.cpp \
-				IMateriaSource.cpp
+				test.cpp
 
 OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.cpp=.o))
 
