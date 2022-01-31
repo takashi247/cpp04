@@ -13,7 +13,9 @@ SRCS		:= main.cpp \
 				Ice.cpp \
 				Cure.cpp \
 				Character.cpp \
-				MateriaSource.cpp
+				MateriaSource.cpp \
+				ICharacter.cpp \
+				IMateriaSource.cpp
 
 OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.cpp=.o))
 
@@ -27,7 +29,7 @@ INCLUDE		:= -I./include
 
 RM			:= rm -rf
 
-DEBUG		:= -g -fsanitize=address
+DEBUG		:= -g# -fsanitize=address
 
 SHADOW		:= -Wshadow
 
