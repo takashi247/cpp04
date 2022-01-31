@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "ICharacter.hpp"
+
 const std::string Cure::kTypeNameCure = "cure";
 
 Cure::Cure() : AMateria(kTypeNameCure) {

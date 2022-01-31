@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "ICharacter.hpp"
+
 const std::string Ice::kTypeNameIce = "ice";
 
 Ice::Ice() : AMateria(kTypeNameIce) {
