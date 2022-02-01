@@ -11,13 +11,13 @@ class MateriaSource : public IMateriaSource {
   ~MateriaSource();
   void learnMateria(AMateria *m);
   AMateria *createMateria(std::string const &type);
+  static const int kMaxNumOfLearnedMaterias = 4;
 
  private:
   static const std::string kErrMsgNoRoomToLearn;
-  static const int kMaxNumOfLearnedMaterias = 4;
   AMateria* learned_materias_[kMaxNumOfLearnedMaterias];
   void printNoRoomToLearnError();
-  bool isDuplicate(int idx);
+  bool isDuplicated(int idx);
 };
 
 #endif // MATERIASOURCE_HPP

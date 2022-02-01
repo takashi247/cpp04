@@ -34,7 +34,7 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
 
 MateriaSource::~MateriaSource() {
   for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
-    if (learned_materias_[i] && learned_materias_[i]->getAvailability() && !isDuplicate(i)) {
+    if (learned_materias_[i] && learned_materias_[i]->getAvailability() && !isDuplicated(i)) {
       delete learned_materias_[i];
     }
   }
@@ -71,7 +71,7 @@ void MateriaSource::printNoRoomToLearnError() {
   std::cout << MateriaSource::kErrMsgNoRoomToLearn << std::endl;
 }
 
-bool MateriaSource::isDuplicate(int idx) {
+bool MateriaSource::isDuplicated(int idx) {
   for (int i = idx + 1; i < kMaxNumOfLearnedMaterias; ++i) {
     if (learned_materias_[i] == learned_materias_[idx]) {
       return true;
