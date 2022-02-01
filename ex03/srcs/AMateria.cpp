@@ -4,7 +4,7 @@
 
 #include "ICharacter.hpp"
 
-const std::string AMateria::kErrMsgAvailability = "ERROR: The materia is already equiped by someone or used as a source materia";
+const std::string AMateria::kErrMsgAvailability = "ERROR: The materia is already equipped by someone";
 
 AMateria::AMateria() : is_available_(true) {}
 
