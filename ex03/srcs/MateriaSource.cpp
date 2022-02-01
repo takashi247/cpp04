@@ -2,69 +2,80 @@
 
 #include <iostream>
 
-const std::string MateriaSource::kErrMsgFullyLearned = "ERROR: The materia source is fully used";
+const std::string MateriaSource::kErrMsgNoRoomToLearn = "ERROR: The materia source has no room to learn";
 
-MateriaSource::MateriaSource() : num_of_learned_materias_(0) {
+MateriaSource::MateriaSource() {
+  for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
+    learned_materias_[i] = NULL;
+  }
 }
 
-MateriaSource::MateriaSource(MateriaSource const &other) : num_of_learned_materias_(0) {
+MateriaSource::MateriaSource(MateriaSource const &other) {
+  for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
+    learned_materias_[i] = NULL;
+  }
   *this = other;
 }
 
 MateriaSource &MateriaSource::operator=(MateriaSource const &other) {
   if (this != &other) {
     for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
-      AMateria* tmp;
-      if (i < num_of_learned_materias_) {
-        tmp = learned_materias_[i];
-      }
-      if (i < other.num_of_learned_materias_) {
+      AMateria* tmp = learned_materias_[i];
+      if (other.learned_materias_[i]) {
         learned_materias_[i] = (other.learned_materias_[i])->clone();
       }
-      if (i < num_of_learned_materias_) {
+      if (tmp) {
         delete tmp;
       }
     }
-    num_of_learned_materias_ = other.num_of_learned_materias_;
   }
   return *this;
 }
 
 MateriaSource::~MateriaSource() {
-  for (int i = 0; i < num_of_learned_materias_; ++i) {
-    delete learned_materias_[i];
+  for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
+    if (learned_materias_[i] && learned_materias_[i]->getAvailability() && !isDuplicate(i)) {
+      delete learned_materias_[i];
+    }
   }
 }
 
 void MateriaSource::learnMateria(AMateria *m) {
-  if (!m->getAvailability()) {
-    AMateria::print_availability_error();
+  if (!m)
     return ;
+  int idx = 0;
+  while (idx < kMaxNumOfLearnedMaterias && learned_materias_[idx]) {
+    ++idx;
   }
-  if (num_of_learned_materias_ < kMaxNumOfLearnedMaterias) {
-    learned_materias_[num_of_learned_materias_] = m;
-    m->setAvailability(false);
-    ++num_of_learned_materias_;
+  if (idx != kMaxNumOfLearnedMaterias) {
+    learned_materias_[idx] = m;
   }
   else {
-    printMateriaSourceError();
+    printNoRoomToLearnError();
     return ;
   }
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type) {
   if (type != "") {
-    int idx = 0;
-    while (idx < kMaxNumOfLearnedMaterias && learned_materias_[idx]->getType() != type) {
-      ++idx;
-    }
-    if (idx != kMaxNumOfLearnedMaterias) {
-      return learned_materias_[idx]->clone();
+    for (int i = 0; i < kMaxNumOfLearnedMaterias; ++i) {
+      if (learned_materias_[i] && learned_materias_[i]->getType() == type) {
+        return learned_materias_[i]->clone();
+      }
     }
   }
-  return 0;
+  return (0);
 }
 
-void MateriaSource::printMateriaSourceError() {
-  std::cout << MateriaSource::kErrMsgFullyLearned << std::endl;
+void MateriaSource::printNoRoomToLearnError() {
+  std::cout << MateriaSource::kErrMsgNoRoomToLearn << std::endl;
+}
+
+bool MateriaSource::isDuplicate(int idx) {
+  for (int i = idx + 1; i < kMaxNumOfLearnedMaterias; ++i) {
+    if (learned_materias_[i] == learned_materias_[idx]) {
+      return true;
+    }
+  }
+  return false;
 }
