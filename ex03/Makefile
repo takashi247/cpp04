@@ -14,7 +14,7 @@ SRCS		:= main.cpp \
 				Cure.cpp \
 				Character.cpp \
 				MateriaSource.cpp \
-				test.cpp
+				Tester.cpp
 
 OBJS		:= $(addprefix $(OBJSDIR), $(SRCS:.cpp=.o))
 
@@ -30,7 +30,11 @@ RM			:= rm -rf
 
 DEBUG		:= -g# -fsanitize=address
 
-SHADOW		:= -Wshadow
+SHADOW	:= -Wshadow
+
+TEST		:= -D TEST=1
+
+LEAKS   := -D LEAKS=1
 
 all:		$(NAME)
 
@@ -55,6 +59,12 @@ debug:		re
 
 shadow:		CXXFLAGS += $(SHADOW)
 shadow:		re
+
+full:			CXXFLAGS += $(TEST)
+full:			re
+
+leaks:		CXXFLAGS += $(LEAKS) $(TEST)
+leaks:		re
 
 -include $(DEPS)
 
