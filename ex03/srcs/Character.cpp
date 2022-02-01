@@ -30,6 +30,7 @@ Character &Character::operator=(Character const &other) {
       AMateria* tmp = materias_[i];
       if (other.materias_[i]) {
         materias_[i] = (other.materias_[i])->clone();
+        materias_[i]->setAvailability(false);
       } else {
         materias_[i] = NULL;
       }
