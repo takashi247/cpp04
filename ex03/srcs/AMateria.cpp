@@ -6,17 +6,15 @@
 
 const std::string AMateria::kErrMsgAvailability = "ERROR: The materia is already equiped by someone or used as a source materia";
 
-AMateria::AMateria() : is_available_(true) {
-}
+AMateria::AMateria() : is_available_(true) {}
 
-AMateria::AMateria(const std::string &type) : type_(type), is_available_(true) {
-}
+AMateria::AMateria(const std::string &type) : type_(type), is_available_(true) {}
+
 AMateria::AMateria(AMateria const &other) {
   *this = other;
 }
 
-AMateria::~AMateria() {
-}
+AMateria::~AMateria() {}
 
 AMateria &AMateria::operator=(AMateria const &other) {
   if (this != &other) {
