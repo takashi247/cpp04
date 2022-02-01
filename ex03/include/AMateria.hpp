@@ -22,7 +22,7 @@ class AMateria {
 
  protected:
   std::string type_;
-  // true if the materia is NOT equiped by someone && NOT used as a source materia
+  // true if the materia is equipepd by someone
   bool is_available_;
   static const std::string kErrMsgAvailability;
 };
