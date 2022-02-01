@@ -9,6 +9,9 @@ Tester::Tester(Tester const &other) {
 }
 
 Tester &Tester::operator=(Tester const &other) {
+  if (this != &other) {
+    *this = other;
+  }
   return *this;
 }
 
